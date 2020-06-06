@@ -41,7 +41,7 @@ public class SimpleFragment extends Fragment {
 
 
 
-        listView = root.findViewById(R.id.listView);
+        listView = root.findViewById(R.id.listViewDetailed);
 
 
 
@@ -51,6 +51,7 @@ public class SimpleFragment extends Fragment {
       //  final TextView textView = root.findViewById(R.id.textView);
 
       //  textView.setText(R.string.No_url_entered);
+        
 
 
         SharedPreferences sharedPreferences

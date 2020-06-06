@@ -68,37 +68,15 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         String clientURL = url.getText().toString();
 
-                        String ValidatedURL = Simple.checkIfSiteIsValid(clientURL);
+                        String ValidatedURL = Simple.domainParser(clientURL);
 
                         if(Simple.domainParser(clientURL).contains("Invalid Website")){
                                 //Alert User that Invalid Website
                             Toast.makeText(getApplicationContext(), "Enter Valid Website",
                                     Toast.LENGTH_LONG).show();
 
-                            String testURL = "http://www.google.com";
-
-                            SharedPreferences sharedPreferences
-                                    = getSharedPreferences("clientUrl",
-                                    MODE_PRIVATE);
-
-
-                            SharedPreferences.Editor myEdit
-                                    = sharedPreferences.edit();
-
-                            myEdit.putString(
-                                    "clientURL",
-                                    testURL);
-
-                            myEdit.apply();
-                            finish();
-
-                            startActivity(getIntent());
-                            dialog.cancel();
-
-                            }else{
-
+//                            String testURL = "http://www.google.com";
 //
-//                            //Valid Website
 //                            SharedPreferences sharedPreferences
 //                                    = getSharedPreferences("clientUrl",
 //                                    MODE_PRIVATE);
@@ -116,6 +94,28 @@ public class MainActivity extends AppCompatActivity {
 //
 //                            startActivity(getIntent());
 //                            dialog.cancel();
+
+                            }else{
+
+//
+//                            //Valid Website
+                            SharedPreferences sharedPreferences
+                                    = getSharedPreferences("clientUrl",
+                                    MODE_PRIVATE);
+
+
+                            SharedPreferences.Editor myEdit
+                                    = sharedPreferences.edit();
+
+                            myEdit.putString(
+                                    "clientURL",
+                                    ValidatedURL);
+
+                            myEdit.apply();
+                            finish();
+
+                            startActivity(getIntent());
+                            dialog.cancel();
                         }
 
 

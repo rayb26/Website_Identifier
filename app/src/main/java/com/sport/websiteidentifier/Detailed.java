@@ -44,17 +44,16 @@ public class Detailed implements Runnable {
             return "Invalid URL";
         } else {
 
-            getProvidedUrl();
-            getBody(chosenUrl);
-            getTitle(chosenUrl);
-            getHeaderData(chosenUrl);
-            getDoctype(chosenUrl);
-            getRedirectedURL(chosenUrl);
-            getMetaData(chosenUrl);
-            checkIfSiteIsValid(chosenUrl);
+
+//            return getProvidedUrl(domainParser(chosenUrl)) + "!" + getBody(domainParser(chosenUrl));
+
+            return getProvidedUrl(domainParser(chosenUrl) + "->" + getTitle(domainParser(chosenUrl)) +  "->" + getBody(domainParser(chosenUrl)) + "->" +
+                    getRedirectedURL(domainParser(chosenUrl)) + "->" + getMetaData(domainParser(chosenUrl)) + "->" + getHeaderData(domainParser(chosenUrl)) + "->" +
+                    getDoctype(domainParser(chosenUrl)) + "->" + checkIfSiteIsValid(domainParser(chosenUrl)));
+
+
 
         }
-        return "Error";
 
 
     }
@@ -72,12 +71,13 @@ public class Detailed implements Runnable {
         } else if (urlSplit.length == 2) {
             return stringBuilder.append("http://www." + choseUrl).toString();
 
-        } else if (urlSplit.length == 3) {
-            return stringBuilder.append("http://" + choseUrl).toString();
+        } else if (urlSplit.length == 3 && !choseUrl.contains("http")) {
+            return stringBuilder.append("http://") + choseUrl;
+        }else if (urlSplit.length == 3 && choseUrl.contains("http")){
+            return choseUrl;
         } else {
-            return "Invalid URL";
+            return "Invalid Website";
         }
-
     }
 
     public static String getRedirectedURL(String chosenUrl) throws IOException, InterruptedException {
@@ -92,8 +92,8 @@ public class Detailed implements Runnable {
         return "Redirected URL: " + response.url().toString() + " in " + elapsedTimeMillis() + " milliseconds";
     }
 
-    public static String getProvidedUrl() {
-        return "Provided Url: " + clientUrl;
+    public static String getProvidedUrl(String choseUrl) {
+        return "Provided Url: " + choseUrl;
     }
 
     public static long elapsedTimeMillis() {
@@ -113,7 +113,7 @@ public class Detailed implements Runnable {
     public static String getTitle(String chosenUrl) {
         Document document = null;
         try {
-            document = Jsoup.connect(clientUrl).userAgent("mozilla/17.0").get();
+            document = Jsoup.connect(chosenUrl).userAgent("mozilla/17.0").get();
             String webPageTitle = document.title();
             if (webPageTitle.contains("404")) {
                 return "404 Error, Web Page Is Not Available";
@@ -129,17 +129,17 @@ public class Detailed implements Runnable {
     public static String getBody(String chosenUrl){
 
         try {
-            Document document = Jsoup.connect(clientUrl).userAgent("mozilla/17.0").get();
+            Document document = Jsoup.connect(chosenUrl).userAgent("mozilla/17.0").get();
             String getBody = document.body().text();
             return "Webpage Body: " + getBody;
         } catch (HttpStatusException e){
-            return "Invalid Website";
+            return "Check Internet Connection";
 
         } catch (IllegalArgumentException e){
-            return "Invalid Website";
+            return "Error Fetching Data";
 
         } catch (IOException e) {
-            return "Invalid Website";
+            return "Error Fetching Data";
         }
 
     }
@@ -147,20 +147,20 @@ public class Detailed implements Runnable {
     public static String getDoctype(String chosenurl){
 
         try {
-            Document document = Jsoup.connect(clientUrl).userAgent("mozilla/17.0").get();
+            Document document = Jsoup.connect(chosenurl).userAgent("mozilla/17.0").get();
             String getBody = String.valueOf(document.documentType());
             return "Webpage Doctype: " + getBody;
         }catch (HttpStatusException e){
-            return "Error";
+            return "Check Your Internet Connection";
         } catch (IOException e) {
-            return "Error";
+            return "Error Fetching Data";
 
         }
 
     }
     public static String getHeaderData(String chosenUrl){
         try {
-            Document document = Jsoup.connect(clientUrl).userAgent("mozilla/17.0").get();
+            Document document = Jsoup.connect(chosenUrl).userAgent("mozilla/17.0").get();
             Elements htags = document.select("h1, h2");
             Elements h1tag = htags.select("h1");
             Elements h2tag = htags.select("h2");
@@ -178,7 +178,7 @@ public class Detailed implements Runnable {
             return "Error";
 
         }
-        return "Error";
+        return "No Header Tags Available";
 
     }
 
@@ -235,7 +235,7 @@ public class Detailed implements Runnable {
             }
         }
 
-        return "";
+        return "No Meta-Data Available";
 
     }
     public static String checkIfSiteIsValid(String chosenUrl) {

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Website Identifier</string>
+    <string name="tab_text_1">Simple Mode</string>
+    <string name="tab_text_2">Detailed Mode</string>
+    <string name="No_url_entered">No URL Entered</string>
+    <string name="Enter_Valid_URL">Enter Valid URL</string>
+</resources>

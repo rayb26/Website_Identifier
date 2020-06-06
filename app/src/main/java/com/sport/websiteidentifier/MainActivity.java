@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Enter Valid Website",
                                     Toast.LENGTH_LONG).show();
 
-                            String testURL = "www.google.com";
+                            String testURL = "http://www.google.com";
 
                             SharedPreferences sharedPreferences
                                     = getSharedPreferences("clientUrl",

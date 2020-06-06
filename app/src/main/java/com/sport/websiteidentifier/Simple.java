@@ -98,7 +98,7 @@ public class Simple implements Callable<String> {
             return stringBuilder.append("http://www." + choseUrl).toString();
 
         } else if (urlSplit.length == 3) {
-            return stringBuilder.append("http://" + choseUrl).toString();
+            return choseUrl;
         } else {
             return "Invalid Website";
         }

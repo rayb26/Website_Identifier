@@ -4,13 +4,6 @@
     android:layout_gravity="center" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/No_url_entered"
-        android:textSize="18sp" />
-
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"

@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,7 +18,6 @@ import androidx.fragment.app.Fragment;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 
 
@@ -26,7 +25,7 @@ public class SimpleFragment extends Fragment {
 
     ListView listView;
 
-    ArrayList<String> dataForListView = new ArrayList<>();
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -41,24 +40,29 @@ public class SimpleFragment extends Fragment {
         root.invalidate();
 
 
+
         listView = root.findViewById(R.id.listView);
 
 
-        final TextView textView = root.findViewById(R.id.textView);
 
-        textView.setText(R.string.No_url_entered);
+
+
+
+      //  final TextView textView = root.findViewById(R.id.textView);
+
+      //  textView.setText(R.string.No_url_entered);
 
 
         SharedPreferences sharedPreferences
                 = Objects.requireNonNull(getActivity()).getSharedPreferences("clientUrl", Context.MODE_PRIVATE);
         final String clientURL = sharedPreferences.getString("clientURL", "");
-        textView.setText(clientURL);
+       // textView.setText(clientURL);
 
 
         //Below is a final check that there are no shared pref values or anything that will cause app to crash
         assert clientURL != null;
         if (Simple.domainParser(clientURL).contains("Invalid Website")) {
-            textView.setText(R.string.No_url_entered);
+            //textView.setText(R.string.No_url_entered);
 
         } else {
 
@@ -80,10 +84,24 @@ public class SimpleFragment extends Fragment {
                             public void run() {
 
 
-                                String[] seperateData = getDataString.split("!");
-                                dataForListView.addAll(Arrays.asList(seperateData));
+                                ArrayList<String> dataForListView = new ArrayList<>();
+                                ArrayAdapter<String> adapter;
 
-                                textView.setText(getDataString);
+                                adapter=new ArrayAdapter<String>(getContext(),
+                                        android.R.layout.simple_list_item_1,
+                                        dataForListView);
+                                listView.setAdapter(adapter);
+
+
+                                String[] seperateData = getDataString.split("!");
+
+                                for(String getData : seperateData){
+                                    adapter.add(getData);
+                                }
+                                //dataForListView.addAll(Arrays.asList(seperateData));
+
+
+                                //textView.setText(getDataString);
                             }
                         });
 

@@ -112,6 +112,11 @@ public class MainActivity extends AppCompatActivity {
                                     ValidatedURL);
 
                             myEdit.apply();
+
+
+
+
+
                             finish();
 
                             startActivity(getIntent());
@@ -146,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                Snackbar.make(view, "Tap Button To Enter URL", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                Snackbar.make(view, "Tap Once To Enter URL", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 return true;
             }
         });

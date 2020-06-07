@@ -198,39 +198,31 @@ public class Detailed implements Runnable {
                     doc = Jsoup.connect(chosenUrl).get();
                     if (doc.title().contains("404")) {
                         return "404 Error, Invalid Web Page";
-                        //System.out.println("404 Error, Invalid Web Page");
                     }
                     String elements = String.valueOf(doc.select("meta[name=description]"));
                     String keywords = String.valueOf(doc.select("meta[name=keywords]"));
                     String origin = String.valueOf(doc.select("meta[name=referrer]"));
                     if (origin.isEmpty() && elements.isEmpty() && keywords.isEmpty()) {
-                        return "Metadata Values Incompatible";
-                       // System.out.println("\tMetadata Values Incompatible");
+                        return "Meta-data Values Incompatible";
                     }
                     if (keywords.isEmpty()) {
-                        //  System.out.println("\tWebsite Does Not Have Keyword Metadata");
-                        //System.out.println("");
+
                     } else {
                         String mkeywords = doc.select("meta[name=keywords]").first().attr("content");
                         return "Keywords: " + mkeywords;
-                        //System.out.println("\tKeywords: " + mkeywords);
                     }
                     if (elements.isEmpty()) {
-                        //System.out.println("");
                     } else {
                         String mDescription = doc.select("meta[name=description]").get(0).attr("content");
                         return "Description: " + mDescription;
-                       // System.out.println("\tDescription: " + mDescription);
                     }
-                    if (origin.isEmpty()) {
-                        //System.out.println("");
+                    if (!origin.isEmpty()) {
                     } else {
                         String mRobots = doc.select("meta[name=robots]").first().attr("content");
                         return "Robots: " + mRobots;
-                       // System.out.println("\tRobots: " + mRobots);
                     }
                 } catch (IOException e) {
-                    return "Error";
+                    return "Error Fetching Data";
                 }
             }
         }
@@ -242,15 +234,12 @@ public class Detailed implements Runnable {
         try {
             InetAddress ip = InetAddress.getByName(new URL(chosenUrl).getHost());
             return "IP Address Of Website: " + ip;
-            //System.out.println("IP Address of Website:\n " + "\t" + ip);
 
         } catch (UnknownHostException e) {
-            return "Invalid Page Error";
-            //System.out.println(" Invalid Page Error");
+            return "Invalid Website";
 
         } catch (MalformedURLException e) {
-            return "Invalid Page Error";
-           // System.out.println("Invalid Page Error");
+            return "Invalid Website";
         }
     }
 

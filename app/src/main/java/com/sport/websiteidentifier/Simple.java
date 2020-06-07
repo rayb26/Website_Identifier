@@ -34,32 +34,21 @@ public class Simple implements Callable<String> {
     }
 
 
-        public Simple(String url, Map<String, String>arrangeData) {
-        this.clientUrl = domainParser(url);
-
-        try {
-            if(getTitle(clientUrl).contains("Invalid Website")){
-                System.out.println("Invalid Website");
-            }else{
-                extractData(clientUrl);
-            }
-        } catch (IOException | InterruptedException e) {
-            System.out.println("Invalid Page Error");
-        }
-
-
-    }
     public static String extractData(String chosenUrl) throws IOException, InterruptedException, IllegalArgumentException {
+
         if (domainParser(chosenUrl).equals("Invalid URL")) {
             //System.out.println("Invalid URL");
             return "Invalid URL";
         } else {
 
+            startTimer();
+
+
+
 
 
             return getProvidedUrl(domainParser(chosenUrl) + "!" + getTitle(domainParser(chosenUrl)) +  "!" +
                     getRedirectedURL(domainParser(chosenUrl)) + "!" + getMetaData(domainParser(chosenUrl)) + "!" + checkIfSiteIsValid(domainParser(chosenUrl)));
-
 
 
         }
@@ -108,7 +97,6 @@ public class Simple implements Callable<String> {
     }
 
     public static String getRedirectedURL(String chosenUrl) throws IOException, InterruptedException {
-        startTimer();
         Connection.Response response = Jsoup.connect(chosenUrl).followRedirects(true).execute();
         if (response.equals(chosenUrl)) {
             stopTimer();
@@ -150,10 +138,10 @@ public class Simple implements Callable<String> {
             }
 
         } catch (IllegalArgumentException e){
-            return "Invalid Website, Illegal Arg Exception";
+            return "Invalid Website";
         }
         catch (IOException e) {
-            return "Invalid Website";
+            return "Error Fetching Website Body";
         }
     }
 
@@ -177,14 +165,13 @@ public class Simple implements Callable<String> {
                     String elements = String.valueOf(doc.select("meta[name=description]"));
 
                     if (elements.isEmpty()) {
-                        //System.out.println("");
+                        return "Meta-Data Values Incompatible";
                     } else {
                         String mDescription = doc.select("meta[name=description]").get(0).attr("content");
                         return "Description: " + mDescription;
-                        //System.out.println("\tDescription: " + mDescription);
                     }
                 } catch (IOException e) {
-                    return "Error";
+                    return "Error Fetching Data";
                 }
             }
         }

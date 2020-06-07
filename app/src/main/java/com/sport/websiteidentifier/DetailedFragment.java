@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -37,6 +38,10 @@ public class DetailedFragment extends Fragment {
 
 
         root.invalidate();
+
+
+        final TextView textView = root.findViewById(R.id.textView3);
+        textView.setVisibility(View.VISIBLE);
 
 
 
@@ -96,6 +101,7 @@ public class DetailedFragment extends Fragment {
 
                                 for(String getData : seperateData){
                                     adapter.add(getData);
+                                    textView.setVisibility(View.INVISIBLE);
                                 }
                                 //dataForListView.addAll(Arrays.asList(seperateData));
 

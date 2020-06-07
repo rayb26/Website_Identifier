@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -42,21 +43,36 @@ public class SimpleFragment extends Fragment {
 
 
         listView = root.findViewById(R.id.listViewDetailed);
+        final TextView textView = root.findViewById(R.id.textView3);
+
+        textView.setVisibility(View.VISIBLE);
+
+       // textView.setText(R.string.No_url_entered);
+
+        ArrayList<String> dataForListView = new ArrayList<>();
+        final ArrayAdapter<String> adapter;
+
+        adapter=new ArrayAdapter<String>(getContext(),
+                android.R.layout.simple_list_item_1,
+                dataForListView);
 
 
 
 
 
-
-      //  final TextView textView = root.findViewById(R.id.textView);
+        //  final TextView textView = root.findViewById(R.id.textView);
 
       //  textView.setText(R.string.No_url_entered);
-        
+
 
 
         SharedPreferences sharedPreferences
                 = Objects.requireNonNull(getActivity()).getSharedPreferences("clientUrl", Context.MODE_PRIVATE);
         final String clientURL = sharedPreferences.getString("clientURL", "");
+
+
+
+
        // textView.setText(clientURL);
 
 
@@ -85,26 +101,31 @@ public class SimpleFragment extends Fragment {
                             public void run() {
 
 
-                                ArrayList<String> dataForListView = new ArrayList<>();
-                                ArrayAdapter<String> adapter;
 
-                                adapter=new ArrayAdapter<String>(getContext(),
-                                        android.R.layout.simple_list_item_1,
-                                        dataForListView);
                                 listView.setAdapter(adapter);
+
+
+
+
+
+
 
 
                                 String[] seperateData = getDataString.split("!");
 
                                 for(String getData : seperateData){
                                     adapter.add(getData);
+                                    textView.setVisibility(View.INVISIBLE);
+
+
                                 }
-                                //dataForListView.addAll(Arrays.asList(seperateData));
 
 
-                                //textView.setText(getDataString);
+
                             }
                         });
+
+
 
                     } catch (InterruptedException | IllegalArgumentException | IOException e) {
                         getActivity().runOnUiThread(new Runnable() {
@@ -120,8 +141,10 @@ public class SimpleFragment extends Fragment {
 
 
                 }
+
             };
             getDataThread.start();
+
             try {
                 getDataThread.join();
             } catch (InterruptedException e) {

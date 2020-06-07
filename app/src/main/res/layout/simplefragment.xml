@@ -4,6 +4,13 @@
     android:layout_gravity="center" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/No_url_entered"
+        android:textSize="24sp" />
+
     <ListView
         android:id="@+id/listViewDetailed"
         android:layout_width="match_parent"

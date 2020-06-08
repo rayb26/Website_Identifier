@@ -50,4 +50,12 @@
         android:layout_margin="@dimen/fab_margin"
         app:backgroundTint="@android:color/holo_orange_light"
         app:srcCompat="@android:drawable/ic_menu_edit" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_anchor="@+id/view_pager"
+        app:layout_anchorGravity="center" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

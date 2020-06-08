@@ -164,6 +164,8 @@ public class Simple implements Callable<String> {
                     }
                     String elements = String.valueOf(doc.select("meta[name=description]"));
 
+
+
                     if (elements.isEmpty()) {
                         return "Meta-Data Values Incompatible";
                     } else {

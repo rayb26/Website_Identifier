@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -31,32 +32,25 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
         FloatingActionButton fab = findViewById(R.id.fab);
+        final ProgressBar progressBar = findViewById(R.id.progressBar);
 
-
+        progressBar.setVisibility(View.INVISIBLE);
 
 
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(getApplicationContext(), SelectWebsite.class);
-//                startActivity(intent);
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//
-//
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
                 LayoutInflater inflater = getLayoutInflater();
                 View dialogView = inflater.inflate(R.layout.alert_dialog,null);
 
-                // Specify alert dialog is not cancelable/not ignorable
-                builder.setCancelable(false);
+                builder.setCancelable(true);
 
-                // Set the custom layout as alert dialog view
                 builder.setView(dialogView);
 
-                // Get the custom alert dialog view widgets reference
                 Button btn_positive = (Button) dialogView.findViewById(R.id.dialog_positive_btn);
                 Button btn_negative = (Button) dialogView.findViewById(R.id.dialog_negative_btn);
                 final EditText url = (EditText) dialogView.findViewById(R.id.et_name);
@@ -75,30 +69,13 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Enter Valid Website",
                                     Toast.LENGTH_LONG).show();
 
-//                            String testURL = "http://www.google.com";
-//
-//                            SharedPreferences sharedPreferences
-//                                    = getSharedPreferences("clientUrl",
-//                                    MODE_PRIVATE);
-//
-//
-//                            SharedPreferences.Editor myEdit
-//                                    = sharedPreferences.edit();
-//
-//                            myEdit.putString(
-//                                    "clientURL",
-//                                    testURL);
-//
-//                            myEdit.apply();
-//                            finish();
-//
-//                            startActivity(getIntent());
-//                            dialog.cancel();
-
                             }else{
 
-//
-//                            //Valid Website
+
+
+
+
+
                             SharedPreferences sharedPreferences
                                     = getSharedPreferences("clientUrl",
                                     MODE_PRIVATE);
@@ -118,9 +95,14 @@ public class MainActivity extends AppCompatActivity {
 
 
                             finish();
-
                             startActivity(getIntent());
-                            dialog.cancel();
+
+
+
+
+                                dialog.cancel();
+
+                            progressBar.setVisibility(View.VISIBLE);
                         }
 
 

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +26,7 @@ import java.util.Objects;
 public class SimpleFragment extends Fragment {
 
     ListView listView;
-
+    ProgressBar progressBarSimpleFragment;
 
 
 
@@ -36,6 +37,11 @@ public class SimpleFragment extends Fragment {
 
 
         final View root = inflater.inflate(R.layout.simplefragment, container, false);
+
+
+
+
+
 
 
         root.invalidate();
@@ -55,8 +61,6 @@ public class SimpleFragment extends Fragment {
         adapter=new ArrayAdapter<String>(getContext(),
                 android.R.layout.simple_list_item_1,
                 dataForListView);
-
-
 
 
 
@@ -131,9 +135,16 @@ public class SimpleFragment extends Fragment {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(getContext(), "Error Fetching Interrupted",
+                                Toast.makeText(getContext(), "No Connection",
                                         Toast.LENGTH_LONG).show();
+
+
+
+                                //  Snackbar.make(getView(), "Tap Once To Enter URL", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+
+
                                 e.printStackTrace();
+
                             }
                         });
 
@@ -143,7 +154,12 @@ public class SimpleFragment extends Fragment {
                 }
 
             };
+
+
             getDataThread.start();
+
+
+
 
             try {
                 getDataThread.join();

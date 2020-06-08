@@ -205,7 +205,14 @@ public class Detailed implements Runnable {
                     if (origin.isEmpty() && elements.isEmpty() && keywords.isEmpty()) {
                         return "Meta-data Values Incompatible";
                     }
-                    if (keywords.isEmpty()) {
+                    if(!keywords.isEmpty() && !elements.isEmpty()){
+                        String mDescription = doc.select("meta[name=description]").get(0).attr("content");
+                        String mkeywords = doc.select("meta[name=keywords]").first().attr("content");
+
+                        return "Description: " + mDescription + "\n\n" + "Keywords: " + mkeywords;                    }
+
+
+                   else if (keywords.isEmpty()) {
 
                     } else {
                         String mkeywords = doc.select("meta[name=keywords]").first().attr("content");

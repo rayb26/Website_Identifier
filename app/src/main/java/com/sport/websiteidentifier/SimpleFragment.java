@@ -74,9 +74,6 @@ public class SimpleFragment extends Fragment {
                 = Objects.requireNonNull(getActivity()).getSharedPreferences("clientUrl", Context.MODE_PRIVATE);
         final String clientURL = sharedPreferences.getString("clientURL", "");
 
-
-
-
         assert clientURL != null;
         if (Simple.domainParser(clientURL).contains("Invalid Website")) {
 
@@ -86,10 +83,8 @@ public class SimpleFragment extends Fragment {
                     = Objects.requireNonNull(getActivity()).getSharedPreferences("clientUrl", Context.MODE_PRIVATE);
             final String getURL = sharedPrefSecondcall.getString("clientURL", "");
 
-
             Thread getDataThread = new Thread() {
                 public void run() {
-
 
                     try {
                         final String getDataString = Simple.extractData(getURL);
@@ -99,16 +94,7 @@ public class SimpleFragment extends Fragment {
                             @Override
                             public void run() {
 
-
-
                                 listView.setAdapter(adapter);
-
-
-
-
-
-
-
 
                                 String[] seperateData = getDataString.split("!");
 

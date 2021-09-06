@@ -77,13 +77,8 @@ public class SimpleFragment extends Fragment {
 
 
 
-       // textView.setText(clientURL);
-
-
-        //Below is a final check that there are no shared pref values or anything that will cause app to crash
         assert clientURL != null;
         if (Simple.domainParser(clientURL).contains("Invalid Website")) {
-            //textView.setText(R.string.No_url_entered);
 
         } else {
 

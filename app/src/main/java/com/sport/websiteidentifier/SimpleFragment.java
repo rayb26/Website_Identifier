@@ -100,6 +100,9 @@ public class SimpleFragment extends Fragment {
                                     textView.setVisibility(View.INVISIBLE);
                                 }
 
+                                
+                                
+                                
                             }
                         });
 

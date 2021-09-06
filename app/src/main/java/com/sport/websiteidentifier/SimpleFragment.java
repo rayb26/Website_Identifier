@@ -69,7 +69,6 @@ public class SimpleFragment extends Fragment {
       //  textView.setText(R.string.No_url_entered);
 
 
-
         SharedPreferences sharedPreferences
                 = Objects.requireNonNull(getActivity()).getSharedPreferences("clientUrl", Context.MODE_PRIVATE);
         final String clientURL = sharedPreferences.getString("clientURL", "");
@@ -78,7 +77,6 @@ public class SimpleFragment extends Fragment {
         if (Simple.domainParser(clientURL).contains("Invalid Website")) {
 
         } else {
-
             SharedPreferences sharedPrefSecondcall
                     = Objects.requireNonNull(getActivity()).getSharedPreferences("clientUrl", Context.MODE_PRIVATE);
             final String getURL = sharedPrefSecondcall.getString("clientURL", "");
@@ -88,7 +86,6 @@ public class SimpleFragment extends Fragment {
 
                     try {
                         final String getDataString = Simple.extractData(getURL);
-
 
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
@@ -101,16 +98,10 @@ public class SimpleFragment extends Fragment {
                                 for(String getData : seperateData){
                                     adapter.add(getData);
                                     textView.setVisibility(View.INVISIBLE);
-
-
                                 }
-
-
 
                             }
                         });
-
-
 
                     } catch (InterruptedException | IllegalArgumentException | IOException e) {
                         getActivity().runOnUiThread(new Runnable() {

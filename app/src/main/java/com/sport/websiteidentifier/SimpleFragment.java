@@ -80,6 +80,12 @@ public class SimpleFragment extends Fragment {
             SharedPreferences sharedPrefSecondcall
                     = Objects.requireNonNull(getActivity()).getSharedPreferences("clientUrl", Context.MODE_PRIVATE);
             final String getURL = sharedPrefSecondcall.getString("clientURL", "");
+            
+            
+            
+            
+            
+            
 
             Thread getDataThread = new Thread() {
                 public void run() {
@@ -105,6 +111,16 @@ public class SimpleFragment extends Fragment {
                                 
                             }
                         });
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
 
                     } catch (InterruptedException | IllegalArgumentException | IOException e) {
                         getActivity().runOnUiThread(new Runnable() {

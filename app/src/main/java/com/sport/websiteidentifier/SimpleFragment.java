@@ -77,16 +77,16 @@ public class SimpleFragment extends Fragment {
         if (Simple.domainParser(clientURL).contains("Invalid Website")) {
 
         } else {
+            
+            
+            
+            
+            
+            
+            
             SharedPreferences sharedPrefSecondcall
                     = Objects.requireNonNull(getActivity()).getSharedPreferences("clientUrl", Context.MODE_PRIVATE);
             final String getURL = sharedPrefSecondcall.getString("clientURL", "");
-            
-            
-            
-            
-            
-            
-
             Thread getDataThread = new Thread() {
                 public void run() {
 
